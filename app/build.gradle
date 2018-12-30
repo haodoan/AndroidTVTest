@@ -6,7 +6,7 @@ android {
         exclude 'META-INF/DEPENDENCIES'
     }
     defaultConfig {
-        applicationId "com.jindo.fpttv"
+        applicationId "com.jindo.LivetvVn"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
