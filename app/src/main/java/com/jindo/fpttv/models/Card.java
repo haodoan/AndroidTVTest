@@ -107,11 +107,11 @@ public class Card {
         return mType;
     }
 
-    public String getDescription() {
+    public String getChannelName() {
         return mDescription;
     }
 
-    public void setDescription(String description) {
+    public void setChannelName(String description) {
         mDescription = description;
     }
 
@@ -138,7 +138,7 @@ public class Card {
         return Color.parseColor(mSelectedColor);
     }
 
-    public String getImageUrl() {
+    public String getLogoURL() {
         return mImageUrl;
     }
 
@@ -146,16 +146,16 @@ public class Card {
         mSelectedColor = selectedColor;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setLogoURL(String imageUrl) {
         mImageUrl = imageUrl;
     }
 
     public URI getImageURI() {
-        if (getImageUrl() == null) return null;
+        if (getLogoURL() == null) return null;
         try {
-            return new URI(getImageUrl());
+            return new URI(getLogoURL());
         } catch (URISyntaxException e) {
-            Log.d("URI exception: ", getImageUrl());
+            Log.d("URI exception: ", getLogoURL());
             return null;
         }
     }

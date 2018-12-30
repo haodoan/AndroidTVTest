@@ -19,12 +19,11 @@ import android.app.Fragment;
 import android.os.Bundle;
 import com.jindo.fpttv.R;
 import com.jindo.fpttv.app.page.PageAndListRowFragment;
-import com.jindo.fpttv.app.page.TVlist;
 
 /*
  * MainActivity class that loads MainFragment
  */
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 
     /**
      * Called when the activity is first created.
@@ -35,12 +34,9 @@ public class MainActivity extends Activity {
 
        if (savedInstanceState == null) {
             Fragment fragment = new PageAndListRowFragment();
-            getFragmentManager().beginTransaction().replace(R.id.main_browse_fragment, fragment)
+            getFragmentManager().beginTransaction().replace(android.R.id.content, fragment)
                     .commit();
         }
-
-    }
-    @Override public void onBackPressed() {
 
     }
 }

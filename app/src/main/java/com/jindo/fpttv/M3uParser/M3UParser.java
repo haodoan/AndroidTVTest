@@ -1,5 +1,8 @@
 package com.jindo.fpttv.M3uParser;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +31,8 @@ public class M3UParser {
 	private static M3UParser mInstance = null;
 	private M3UHandler mHandler = null;
 	private M3UItem mTempItem = null;
+
+	private static ArrayList<M3UItem> mArrayChannelList = new ArrayList<>();
 
 	public M3UParser() {
 	}
@@ -87,6 +92,7 @@ public class M3UParser {
 					flush(handler);
 					mTempItem = parseItem(shrink(tmp.replaceFirst(
 							PREFIX_EXTINF, EMPTY_STRING)));
+					//mArrayChannelList.add(mTempItem);
 				} else if (tmp.startsWith(PREFIX_COMMENT)) {
 					// Do nothing.
 				} else if (tmp.equals(EMPTY_STRING)) {
@@ -96,12 +102,87 @@ public class M3UParser {
 				}
 			}
 			flush(handler);
+
 			//br.close();
 		} //catch (FileNotFoundException e) {
 //			e.printStackTrace();
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+	}
+
+	public ArrayList<M3UItem> CollectTVChannelItem()
+	{
+		return mArrayChannelList;
+	}
+
+	public ArrayList<String> getTVGroupList()
+	{
+		ArrayList TVGroupList = new ArrayList<String>();
+		for(M3UItem item : mArrayChannelList)
+		{
+			if(item.getGroupTitle() != null)
+			{
+				if(!TVGroupList.contains(item.getGroupTitle()))
+				{
+					TVGroupList.add(item.getGroupTitle());
+				}
+
+			}
+		}
+		return  TVGroupList;
+	}
+
+	public HashMap<String,ArrayList<M3UItem>> GetAllChannel()
+	{
+
+		HashMap<String,ArrayList<M3UItem>> map = new HashMap<String,ArrayList<M3UItem>>();
+		ArrayList<String> listChannel = new ArrayList<>();
+		ArrayList<M3UItem> list = new ArrayList<>();
+		for(M3UItem item:mArrayChannelList) {
+
+			if (!listChannel.contains(item.getChannelName())) {
+				listChannel.add(item.getChannelName());
+				list.add(item);
+			}
+		}
+
+		map.put("AllChannel",list);
+
+		return map;
+	}
+	public HashMap<String,ArrayList<M3UItem>> GetChannelListInGroup()
+	{
+		HashMap<String,ArrayList<M3UItem>> map = new HashMap<String,ArrayList<M3UItem>>();
+
+		ArrayList<String> TVGroupList = getTVGroupList();
+
+		ArrayList<String> listChannel = new ArrayList<>();
+		listChannel.clear();
+
+		for(String groupItem : TVGroupList)
+		{
+
+			ArrayList<M3UItem> list = new ArrayList<>();
+			for(M3UItem item:mArrayChannelList)
+			{
+				if(groupItem.equals(item.getGroupTitle()))
+				{
+					if(!listChannel.contains(item.getChannelName()))
+					{
+						listChannel.add(item.getChannelName());
+						list.add(item);
+					}
+				}
+				else
+				{
+					//Log.d("Info",item.getGroupTitle() + "and " +  groupItem);
+				}
+
+			}
+			map.put(groupItem,list);
+		}
+		return  map;
 	}
 
 	private String shrink(String str) {
@@ -113,14 +194,17 @@ public class M3UParser {
 			// The invalid item must be skipped.
 			if (mTempItem.getStreamURL() != null) {
 				handler.onReadEXTINF(mTempItem);
+
+				mArrayChannelList.add(mTempItem);
 			}
 			mTempItem = null;
 		}
 	}
 
 	private void updateURL(String url) {
-		if (mTempItem != null && !INVALID_STREAM_URL.equals(url)) {
-			mTempItem.setStreamURL(url.trim().split("\\s*")[0]);
+		if (mTempItem != null && !INVALID_STREAM_URL.equals(url) && !url.equals("\r")) {
+			mTempItem.setStreamURL(url.trim());
+
 		}
 	}
 

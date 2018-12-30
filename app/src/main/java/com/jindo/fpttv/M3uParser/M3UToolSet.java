@@ -33,25 +33,5 @@ public class M3UToolSet {
 		return file;
 	}
 
-	public ArrayList<M3UItem> getTVGroupList(ArrayList<M3UItem> Items)
-	{
-		ArrayList TVGroupList = new ArrayList<String>();
-		for(M3UItem item : Items)
-		{
-			if(item.getGroupTitle() != null)
-			{
-				if(!TVGroupList.contains(item.getGroupTitle()))
-				{
-					TVGroupList.add(item.getGroupTitle());
-				}
-
-			}
-		}
-		return  TVGroupList;
-	}
-	public getChanelListForGroupChannel()
-	{
-
-	}
 
 }

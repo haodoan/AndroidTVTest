@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
     defaultConfig {
         applicationId "com.jindo.fpttv"
         minSdkVersion 21
@@ -11,7 +14,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,4 +28,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.google.android.exoplayer:exoplayer:r2.2.0'
     implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    implementation 'com.maxmind.geoip2:geoip2:2.12.0'
 }

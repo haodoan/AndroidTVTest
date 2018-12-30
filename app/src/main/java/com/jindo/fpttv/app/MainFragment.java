@@ -58,12 +58,12 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void createRows() {
-//        String json = Utils
-//                .inputStreamToString(getResources().openRawResource(R.raw.launcher_cards));
-//        CardRow[] rows = new Gson().fromJson(json, CardRow[].class);
-//        for (CardRow row : rows) {
-//            mRowsAdapter.add(createCardRow(row));
-//        }
+        String json = Utils
+                .inputStreamToString(getResources().openRawResource(R.raw.launcher_cards));
+        CardRow[] rows = new Gson().fromJson(json, CardRow[].class);
+        for (CardRow row : rows) {
+            mRowsAdapter.add(createCardRow(row));
+        }
     }
 
     private ListRow createCardRow(CardRow cardRow) {

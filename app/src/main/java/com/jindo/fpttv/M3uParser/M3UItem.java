@@ -1,11 +1,18 @@
 package com.jindo.fpttv.M3uParser;
 
+import com.jindo.fpttv.models.Card;
+
 /**
  * This class describes a general m3u item.
  * 
  * @author Ke
  */
-public class M3UItem {
+public class M3UItem  extends Card {
+
+	public M3UItem()
+	{
+		super.setType(Type.GRID_SQUARE);
+	}
 	/**
 	 * The channel name.
 	 */
@@ -47,14 +54,6 @@ public class M3UItem {
 	 */
 	private String mPlugin;
 
-	public void setChannelName(String name) {
-		mChannelName = name;
-	}
-
-	public String getChannelName() {
-		return mChannelName;
-	}
-
 	public void setDuration(int duration) {
 		mDuration = duration;
 	}
@@ -71,14 +70,6 @@ public class M3UItem {
 		return mStreamURL;
 	}
 
-	public void setLogoURL(String url) {
-		mLogoURL = url;
-	}
-
-	public String getLogoURL() {
-		return mLogoURL;
-	}
-
 	public void setGroupTitle(String title) {
 		mGroupTitle = title;
 	}
@@ -91,7 +82,7 @@ public class M3UItem {
 		mType = type;
 	}
 
-	public String getType() {
+	public String getTType() {
 		return mType;
 	}
 

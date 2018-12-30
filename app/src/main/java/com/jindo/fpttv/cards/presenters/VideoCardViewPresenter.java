@@ -40,7 +40,7 @@ public class VideoCardViewPresenter extends ImageCardViewPresenter {
         VideoCard videoCard = (VideoCard) card;
         Glide.with(getContext())
                 .asBitmap()
-                .load(videoCard.getImageUrl())
+                .load(videoCard.getLogoURL())
                 .into(cardView.getMainImageView());
 
     }

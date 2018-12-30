@@ -15,10 +15,13 @@
 package com.jindo.fpttv.cards.presenters;
 
 import android.content.Context;
+
+import com.bumptech.glide.request.RequestOptions;
 import com.jindo.fpttv.R;
 import com.jindo.fpttv.models.Card;
 import android.support.v17.leanback.widget.ImageCardView;
 import android.view.ContextThemeWrapper;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
@@ -54,7 +57,9 @@ public class ImageCardViewPresenter extends AbstractCardPresenter<ImageCardView>
     public void onBindViewHolder(Card card, final ImageCardView cardView) {
         cardView.setTag(card);
         cardView.setTitleText(card.getTitle());
-        cardView.setContentText(card.getDescription());
+        cardView.setContentText(card.getChannelName());
+        cardView.setMainImageDimensions(180,120);
+        cardView.setMainImageScaleType(ImageView.ScaleType.FIT_CENTER);
         if (card.getLocalImageResourceName() != null) {
             int resourceId = getContext().getResources()
                     .getIdentifier(card.getLocalImageResourceName(),
@@ -69,8 +74,10 @@ public class ImageCardViewPresenter extends AbstractCardPresenter<ImageCardView>
         {
             Glide.with(getContext())
                     .asBitmap()
-                    .load(card.getImageUrl())
+                    .load(card.getLogoURL())
+                    .apply(new RequestOptions().centerCrop().fitCenter())
                     .into(cardView.getMainImageView());
+
 
         }
     }
