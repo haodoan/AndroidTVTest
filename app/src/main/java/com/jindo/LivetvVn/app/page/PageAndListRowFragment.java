@@ -157,7 +157,7 @@ public class PageAndListRowFragment extends BrowseFragment {
                     String urlIPTV;
                     switch (ispName)
                     {
-                        case "FPT":
+                        case "FPTDYNAMICIP":
                             urlIPTV = "http://bit.ly/ListFpt";
                             break;
                         case "VNPT":

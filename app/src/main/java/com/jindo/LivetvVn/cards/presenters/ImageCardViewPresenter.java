@@ -58,8 +58,11 @@ public class ImageCardViewPresenter extends AbstractCardPresenter<ImageCardView>
         cardView.setTag(card);
         cardView.setTitleText(card.getTitle());
         cardView.setContentText(card.getChannelName());
+
         cardView.setMainImageDimensions(180,120);
         cardView.setMainImageScaleType(ImageView.ScaleType.FIT_CENTER);
+
+
         if (card.getLocalImageResourceName() != null) {
             int resourceId = getContext().getResources()
                     .getIdentifier(card.getLocalImageResourceName(),

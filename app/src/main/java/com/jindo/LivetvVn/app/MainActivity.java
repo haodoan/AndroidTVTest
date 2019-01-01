@@ -16,7 +16,10 @@ package com.jindo.LivetvVn.app;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.KeyEvent;
+
 import com.jindo.LivetvVn.R;
 import com.jindo.LivetvVn.app.page.PageAndListRowFragment;
 
@@ -25,6 +28,8 @@ import com.jindo.LivetvVn.app.page.PageAndListRowFragment;
  */
 public class MainActivity extends Activity{
 
+
+    private static Resources res;
     /**
      * Called when the activity is first created.
      */
@@ -32,6 +37,7 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        res = getResources();
        if (savedInstanceState == null) {
             Fragment fragment = new PageAndListRowFragment();
             getFragmentManager().beginTransaction().replace(android.R.id.content, fragment)
@@ -39,4 +45,10 @@ public class MainActivity extends Activity{
         }
 
     }
+
+    public static Resources getResourses() {
+        return res;
+    }
+
+
 }

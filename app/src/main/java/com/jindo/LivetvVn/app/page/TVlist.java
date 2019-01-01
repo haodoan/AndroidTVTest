@@ -68,6 +68,8 @@ public class TVlist extends GridFragment {
                     Toast.makeText(getActivity(),
                             " Please install MxPlayer before",
                             Toast.LENGTH_LONG).show();
+
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + "com.mxtech.videoplayer.ad")));
                 }
             }
  

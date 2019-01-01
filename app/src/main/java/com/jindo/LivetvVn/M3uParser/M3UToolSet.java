@@ -27,6 +27,7 @@ public class M3UToolSet {
 				file.addItem(item);
 			}
 		};
+		M3UParser.getInstance().InitializeChannelLogo();
 		M3UParser.getInstance().parse(filename, handler);
 		return file;
 	}

@@ -1,7 +1,17 @@
 package com.jindo.LivetvVn.M3uParser;
 
+import android.content.res.Resources;
+import android.util.Log;
+
+import com.jindo.LivetvVn.R;
+import com.jindo.LivetvVn.app.MainActivity;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +49,7 @@ public class M3UParser {
 		if (mInstance == null) {
 			mInstance = new M3UParser();
 		}
+
 		return mInstance;
 	}
 
@@ -231,12 +242,81 @@ public class M3UParser {
 		return header;
 	}
 
+	public  static String logoChannelIdAdditional[] =
+			{
+					"VTV2 HD",
+					"VTV3 HD",
+					"VTC1",
+					"VTC1 HD",
+					"VTC2 - #Kênh2",
+					"VTC3",
+					"VTC3 HD",
+					"Yeah1 !Family - VTC4",
+					"tvBlue-VTC5",
+					"VTC6",
+					"Today TV - VTC7",
+					"View TV - VTC8",
+					"VTC9",
+					"VTC13 HD",
+					"VTC14",
+					"VTC14 HD"
+			};
+	final static String logoUrl[] =
+	{
+		"https://upload.wikimedia.org/wikipedia/commons/7/7b/VTV2.png",
+		"https://upload.wikimedia.org/wikipedia/vi/f/fc/VTV3HD.png",
+			"https://gg.gg/vtc-1-hd",
+			"https://gg.gg/vtc-1-hd",
+			"https://gg.gg/vtc-2",
+			"https://gg.gg/vtc-3-sd",
+			"https://vignette.wikia.nocookie.net/logos/images/f/f5/VTC3_HD_logo_2018.png/revision/latest?cb=20180722152406&path-prefix=vi",
+			"https://upload.wikimedia.org/wikipedia/vi/e/ef/Yeah1family.png",
+			"https://gg.gg/vtc-5-sc-tv",
+			"https://gg.gg/vtc-6-bac-bo",
+			"http://mobion.vn/Files/Image/admin/2017/12/08/temp_621947320104103.jpg",
+			"https://gg.gg/vtc-8-nam-bo",
+			"https://gg.gg/vtc-9-hd",
+			"https://gg.gg/vtc-13-hd",
+			"https://gg.gg/vtc-14-hd",
+			"https://gg.gg/vtc-14-hd"
+	};
+
+	private Map<String, String> logoChannellList = new HashMap<>();
+
+	public void InitializeChannelLogo()
+	{
+		for(int id = 0; id < logoChannelIdAdditional.length; id++)
+		{
+			logoChannellList.put(logoChannelIdAdditional[id],logoUrl[id]);
+		}
+
+	}
+	private String getLogoUrlSpecific(String ChannelName,String urlLogo)
+	{
+
+		String logoUrl;
+
+		ArrayList<String> logoChannelList = new ArrayList<>(Arrays.asList(logoChannelIdAdditional));
+
+		if(logoChannelList.contains(ChannelName))
+		{
+			logoUrl = logoChannellList.get(ChannelName);
+
+		}
+		else
+		{
+			logoUrl =  urlLogo;
+		}
+
+		return logoUrl;
+	}
 	private M3UItem parseItem(String words) {
 		Map<String, String> attr = parseAttributes(words);
 		M3UItem item = new M3UItem();
 		item.setChannelName(getAttr(attr, ATTR_CHANNEL_NAME));
 		item.setDuration(convert2int(getAttr(attr, ATTR_DURATION)));
-		item.setLogoURL(getAttr(attr, ATTR_LOGO));
+
+		item.setLogoURL(getLogoUrlSpecific(getAttr(attr, ATTR_CHANNEL_NAME),getAttr(attr, ATTR_LOGO)));
 		item.setGroupTitle(getAttr(attr, ATTR_GROUP_TITLE));
 		item.setType(getAttr(attr, ATTR_TYPE));
 		item.setDLNAExtras(getAttr(attr, ATTR_DLNA_EXTRAS));
