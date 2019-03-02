@@ -1,32 +1,44 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '111111'
+            storeFile file('D:/Project/MyProject/FPTtv/VNlivetv.jks')
+            storePassword '111111'
+        }
+    }
     compileSdkVersion 26
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
     }
     defaultConfig {
-        applicationId "com.jindo.LivetvVn"
-        minSdkVersion 21
+        applicationId "com.jindo.FPTTV"
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:leanback-v17:26.1.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation  'com.github.bumptech.glide:glide:4.0.0-RC1'
+    implementation 'com.github.bumptech.glide:glide:4.0.0-RC1'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.google.android.exoplayer:exoplayer:r2.2.0'
-    implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
-    implementation 'com.maxmind.geoip2:geoip2:2.12.0'
+    implementation 'com.google.android.gms:play-services-ads:17.1.2'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
 }
