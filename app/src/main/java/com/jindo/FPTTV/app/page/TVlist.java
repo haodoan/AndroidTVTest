@@ -51,24 +51,24 @@ public class TVlist extends GridFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        MobileAds.initialize(getActivity(),
-//                getActivity().getString(R.string.APP_ID));//ca-app-pub-3940256099942544~3347511713
-//        mInterstitialAd = new InterstitialAd(getActivity());
-//
-//        // set the ad unit ID
-//        mInterstitialAd.setAdUnitId(getActivity().getString(R.string.APP_UNITS));//ca-app-pub-3940256099942544/1033173712
-//
-//        if(BuildConfig.DEBUG) {
-//            adRequest = new AdRequest.Builder()
-//                    .addTestDevice("34AC4DDDBE9C1BBF20BF16919B21AD7D")
-//                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                    .build();
-//        }
-//        else {
-//            adRequest = new AdRequest.Builder()
-//                    .build();
-//        }
-//        mInterstitialAd.loadAd(adRequest);
+        MobileAds.initialize(getActivity(),
+                getActivity().getString(R.string.APP_ID));//ca-app-pub-3940256099942544~3347511713
+        mInterstitialAd = new InterstitialAd(getActivity());
+
+        // set the ad unit ID
+        mInterstitialAd.setAdUnitId(getActivity().getString(R.string.APP_UNITS));//ca-app-pub-3940256099942544/1033173712
+
+        if(BuildConfig.DEBUG) {
+            adRequest = new AdRequest.Builder()
+                    .addTestDevice("34AC4DDDBE9C1BBF20BF16919B21AD7D")
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+        }
+        else {
+            adRequest = new AdRequest.Builder()
+                    .build();
+        }
+        mInterstitialAd.loadAd(adRequest);
 
 //        mInterstitialAd.setAdListener(new AdListener() {
 //            public void onAdLoaded() {
@@ -113,8 +113,7 @@ public class TVlist extends GridFragment {
                 intent.setComponent(new ComponentName(MXPackageName, "org.videolan.vlc.gui.video.VideoPlayerActivity"));
                 intent.setData(Uri.parse(channelUrl));
                 intent.putExtra("title",ChannelName);
-               // startActivityForResult(intent,10);
-                startActivity(intent);
+                startActivityForResult(intent,10);
             }
             else
             {
