@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- サーバー一覧画面 -->
+    <style name="GroupChannelTheme" parent="Theme.Leanback.VerticalGrid">
+        <!-- カテゴリヘッダー背景色設定 -->
+        <item name="defaultBrandColor">@color/fastlane_background</item>
+
+        <item name="android:windowBackground">@drawable/bg_living_room</item>
+    </style>
+
+
+</resources>

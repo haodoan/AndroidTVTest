@@ -3,30 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jindo.FPTTV">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
-
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-    <uses-feature android:name="android.hardware.faketouch"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.telephony"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.camera"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.nfc"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.location.gps"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.microphone"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.sensor"
-        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.faketouch"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor"
+        android:required="false" />
 
     <supports-screens
         android:anyDensity="true"
@@ -37,35 +42,48 @@
         android:xlargeScreens="true" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/mobileicon"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/Theme.Leanback">
-
         <activity
             android:name="com.jindo.FPTTV.app.MainActivity"
             android:banner="@drawable/logo"
             android:icon="@drawable/logo"
             android:label="@string/app_name"
             android:logo="@drawable/logo"
+            android:theme="@style/GroupChannelTheme"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.jindo.FPTTV.app.LaunchActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.Leanback.Browse"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.jindo.FPTTV.TVList.TVListGroupActivity"
+            android:screenOrientation="landscape"/>
+
+        <provider
+            android:name="com.jindo.FPTTV.data.ChannelProvider"
+            android:authorities="${applicationId}.ChannelProvider"
+            android:enabled="true"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/APP_ID"/>
+            android:value="@string/APP_ID" />
     </application>
 
 </manifest>

@@ -20,22 +20,45 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.jindo.FPTTV.R;
-import com.jindo.FPTTV.app.page.PageAndListRowFragment;
+import com.jindo.FPTTV.TVList.TVListGroupFragment;
+
 
 
 /*
  * MainActivity class that loads MainFragment
  */
 public class MainActivity extends Activity{
+
     /**
      * Called when the activity is first created.
      */
+    private ProgressBar spinner;
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
+
+        TVListGroupFragment.registerCallback(new TVListGroupFragment.LoadingProgress() {
+            @Override
+            public void ProgressLoadingVisible(boolean visible) {
+                if(visible == true)
+                {
+
+                    spinner.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                   spinner.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        //spinner.setVisibility(View.VISIBLE);
         try {
             versionChecker VersionChecker = new versionChecker();
             String versionUpdated = VersionChecker.execute().get().toString();
@@ -62,7 +85,7 @@ public class MainActivity extends Activity{
         }
 
        if (savedInstanceState == null) {
-            Fragment fragment = new PageAndListRowFragment();
+            Fragment fragment = new TVListGroupFragment();
             getFragmentManager().beginTransaction().replace(android.R.id.content, fragment)
                     .commit();
 
